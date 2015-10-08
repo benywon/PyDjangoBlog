@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import  url
-from blog.MyBlog.BlogContent import Article
+from blog.MyBlog.BlogContent import Article, ArticleEdit
 from blog.adminrelate import TweetPost,poempost,PicPost,FilePost,CommentPost,GodUserLog,LocationPost
 from blog.adminrelate.GodUserLog import DataRestore
 
@@ -23,7 +23,8 @@ urlpatterns = [
                        url(r'^BackUpFiles/edit/',FilePost.BackUpSee,name = 'backup'),
                        url(r'^ReStore/$',DataRestore,name = 'poemsedit'),
                        url(r'^Article/$',Article,name = 'articleedit'),
-                       url(r'^Article/edit/',Article,name = 'articleedit'),
+                       url(r'^Article/edit/$',ArticleEdit,name = 'articleedit'),
+                       url(r'^Article/edit/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                        url(r'^Article/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
 
                       ]

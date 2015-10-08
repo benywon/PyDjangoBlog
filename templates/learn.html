@@ -52,7 +52,7 @@
 
 {% for post in posts %}
     <div class="wz">
-            <h3><a href="#" title="{{ post.title }}">{{ post.title }}</a></h3>
+            <h3><a href="/blog/Article/?id={{ post.id }}" title="{{ post.title }}">{{ post.title }}</a></h3>
              <dl>
                   {% if post.ishowpic %}
                <dt><img src="{{ post.picshow }}" width="200" height="123" alt=""></dt>

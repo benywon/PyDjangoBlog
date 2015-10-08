@@ -19,8 +19,9 @@ class BlogsPost(models.Model):
     category = models.CharField(max_length = 150,default='其他')
     abstract = models.CharField(max_length = 250,default='暂无简要介绍')
     auther=models.CharField(max_length = 150,default='王炳宁')
-    body = UEditorField('内容',height=100,width=500,default='test',imagePath="./FileDir/blogmaterials/uploadpic/",toolbars='full',filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
+    body = UEditorField("描述",width=1000,height=500,max_length=10000,toolbars="full",imagePath="./FileDir/blogmaterials/uploadpic/",filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
     timestamp = models.DateTimeField()
+    lastmodified=models.DateTimeField(default=datetime.datetime.now())
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ('title','timestamp')
