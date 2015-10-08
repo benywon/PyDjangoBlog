@@ -122,6 +122,25 @@ def __storedatabase():
     dest=path+'\\backupdatabase\\'+timestr+dataname
     __ourcopy(source,dest)
     UpdateData(dest)
+    dataname='userlogdb.sqlite3'
+
+    ISOTIMEFORMAT='%Y-%m-%d-%H-%M-%S'
+    timestr=time.strftime( ISOTIMEFORMAT, time.localtime())
+
+    source=path+'\\'+dataname
+    dest=path+'\\backupdatabase\\'+timestr+dataname
+    __ourcopy(source,dest)
+    UpdateData(dest)
+
+    dataname='Articlesdb.sqlite3'
+
+    ISOTIMEFORMAT='%Y-%m-%d-%H-%M-%S'
+    timestr=time.strftime( ISOTIMEFORMAT, time.localtime())
+
+    source=path+'\\'+dataname
+    dest=path+'\\backupdatabase\\'+timestr+dataname
+    __ourcopy(source,dest)
+    UpdateData(dest)
     # os.remove(dest)
 
 def __storeFile():
