@@ -1,0 +1,227 @@
+.swipebox2-overflow-hidden {
+  overflow: hidden!important;
+}
+
+#swipebox2-overlay img {
+  border: none!important;
+}
+
+#swipebox2-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 9999;
+  overflow: hidden;
+  display: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+#swipebox2-slider {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+  position: absolute;
+}
+
+#swipebox2-slider .slide {
+  background: url(../images/loader.gif) no-repeat center center;
+  height: 100%;
+  line-height: 1px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+#swipebox2-slider .slide:before {
+  content: "";
+  display: inline-block;
+  height: 50%;
+  width: 1px;
+  margin-right: -1px;
+}
+
+#swipebox2-slider .slide img {
+  display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
+  width: 35%;
+  height: auto;
+  vertical-align: middle;
+}
+
+#swipebox2-action, #swipebox2-caption {
+  position: absolute;
+  left: 0;
+  z-index: 999;
+  height: 50px;
+  width: 100%;
+}
+
+#swipebox2-action {
+  bottom: -50px;
+}
+#swipebox2-action.visible-bars {
+  bottom: 0;
+}
+
+#swipebox2-action.force-visible-bars {
+  bottom: 0!important;
+}
+
+#swipebox2-caption {
+  top: -50px;
+  text-align: center;
+}
+#swipebox2-caption.visible-bars {
+  top: 0;
+}
+
+#swipebox2-caption.force-visible-bars {
+  top: 0!important;
+}
+
+#swipebox2-action #swipebox2-prev, #swipebox2-action #swipebox2-next,
+#swipebox2-action #swipebox2-close {
+  background-image: url(../images/icons.png);
+  background-repeat: no-repeat;
+  border: none!important;
+  text-decoration: none!important;
+  cursor: pointer;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+}
+
+#swipebox2-action #swipebox2-close {
+  background-position: 15px 12px;
+  left: 40px;
+}
+
+#swipebox2-action #swipebox2-prev {
+  background-position: -32px 13px;
+  right: 100px;
+}
+
+#swipebox2-action #swipebox2-next {
+  background-position: -78px 13px;
+  right: 40px;
+}
+
+#swipebox2-action #swipebox2-prev.disabled,
+#swipebox2-action #swipebox2-next.disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+
+#swipebox2-slider.rightSpring {
+  -moz-animation: rightSpring 0.3s;
+  -webkit-animation: rightSpring 0.3s;
+}
+
+#swipebox2-slider.leftSpring {
+  -moz-animation: leftSpring 0.3s;
+  -webkit-animation: leftSpring 0.3s;
+}
+
+@-moz-keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: -30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-moz-keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: 30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: -30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: 30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+/* Skin 
+--------------------------*/
+#swipebox2-overlay {
+  background: rgba(13, 13, 13, 0.9);
+}
+
+#swipebox2-action, #swipebox2-caption {
+  text-shadow: 1px 1px 1px black;
+  background-color: rgba(13, 13, 13, 0.9);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(13, 13, 13, 0.9)), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(rgba(13, 13, 13, 0.9), #000000);
+  background-image: -moz-linear-gradient(rgba(13, 13, 13, 0.9), #000000);
+  background-image: -o-linear-gradient(rgba(13, 13, 13, 0.9), #000000);
+  background-image: linear-gradient(rgba(13, 13, 13, 0.9), #000000);
+  -webkit-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
+  -moz-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
+  box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
+  opacity: 0.95;
+}
+
+#swipebox2-action {
+  -webkit-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+  -moz-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+  box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+}
+
+#swipebox2-caption {
+  color: white!important;
+  font-size: 15px;
+  line-height: 43px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+ @media screen and (max-width:640px){
+	#swipebox2-slider .slide img {
+		width: 65%;
+	}
+}

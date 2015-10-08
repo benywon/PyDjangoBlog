@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <javascript src="/site_media/js-css/jquery/jquery-1.7.2.min.js"></javascript>
+    <javascript src="/site_media/js-css/bootstrap/js/bootstrap.js"></javascript>
+    <link href="/site_media/js-css/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<br>
+<a href="/blog/index"><center>回到从前</center></a>
+<br>
+<table class="table table-responsive">
+        <tr>
+            <th>时间</th>
+            <th>作者</th>
+            <th>名称</th>
+            <th>ID</th>
+        </tr>
+    {% for post in posts %}
+        <tr>
+      <td>{{ post.timestamp }}</td>
+           <td>{{ user }}</td>
+           <td>{{ post.headFile }}</td>
+            <td>{{ post.id }}</td>
+        </tr>
+    {% endfor%}
+
+
+</table>
+</body>
+</html>

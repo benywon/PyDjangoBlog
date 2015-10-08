@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>留言板-个人博客</title>
+<meta name="keywords" content="个人博客" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="/site_media/css/index.css"/>
+<link rel="stylesheet" href="/site_media/css/style.css"/>
+<script type="text/javascript" src="/site_media/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery.SuperSlide.2.1.1.js"></script>
+<!--[if lt IE 9]>
+<script src="/site_media/js/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+      <!--header start-->
+    <div id="header">
+      <h1>博客</h1>
+      <p>青春是打开了,就合不上的书。人生是踏上了，就回不了头的路，爱情是扔出了，就收不回的赌注。</p>    
+	  <p>拉长每一分钟，在人生的轨道上，加速吧。</p> 
+    </div>
+     <!--header end-->
+    <!--nav-->
+     <div id="nav">
+        <ul>
+        <li><a href="/blog/index">首页</a></li>
+         <li><a href="/blog/about">关于我</a></li>
+         <li><a href="/blog/shuo">诗情画意</a></li>
+          <li><a href="/blog/diandi">心情点滴</a></li>
+         <li><a href="/blog/xc">相册（单身勿点！！）</a></li>
+         <li><a href="/blog/learn">学无止境</a></li>
+         <li><a href="/blog/guestbook">留言板</a></li>
+         <div class="clear"></div>
+        </ul>
+      </div>
+       <!--nav end-->
+    <!--content start-->
+    <div id="content">
+       <!--left-->
+           <div class="weizi">
+           <div class="wz_text">当前位置：<a href="/blog/index">首页</a>><h1>留言板</h1></div>
+           </div>
+           <div class="g_content" >
+                  <form action="." method="POST">
+                    <textarea  style="height:120px; width:730px;" placeholder="有什么想对我说的么？" name="comment" value=""></textarea><br>
+                      <input type="text" style="height:30px; width:130px" placeholder="请输入大名（可忽略）" name="name" value="">
+                     <select name="canshow">
+                      <option value="True">可见</option>
+                      <option value="False">不可见</option>
+                    </select>
+                    <input type="submit" class="btn" value="完成" />
+                 </form>
+
+           </div>
+<br><br>
+                <h2 align="justify">过往留言</h2>
+
+        <br><br>
+         {% for post in posts %}
+   <div class="wz" >
+             <dl>
+
+               <dd>
+                 <p class="dd_text_1">{{ post.comments }}</p>
+               <p class="dd_text_2">
+               <span class="left author">{{ post.name }}</span><span class="left sj">时间:{{ post.timestamp }}</span>
+                <div class="clear"></div>
+               </p>
+               </dd>
+               <div class="clear"></div>
+             </dl>
+
+   </div>
+ {% endfor%}
+
+ {% if number > 1 %}
+             <a href="/blog/guestbook/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+         <a href="/blog/guestbook/?p={{ next }}">下一页</a>
+         <!--end left -->
+  <div class="clear"></div>
+         
+    </div>
+    <!--content end-->
+    <!--footer-->
+     <div id="footer">
+     <p>Design by:<a href="http://bingning.wang" target="_blank">王炳宁</a> 2015-09-19</p>
+    </div>
+    <!--footer end-->
+    <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
+    <script  type="text/javascript" src="/site_media/js/nav.js"></script>
+</body>
+</html>
+

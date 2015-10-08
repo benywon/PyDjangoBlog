@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客发表界面</title>
+</head>
+<body>
+<h1>{{username}}你好！</h1><br>
+  {% if goduser  %}
+<a href="/blog/Post/Location"><center>记录我的位置</center></a><br><br>
+<a href="/blog/Post/Tweet"><center>新的心情</center></a><br><br>
+<a href="/blog/Post/Pic"><center>新的照片</center></a><br><br>
+<a href="/blog/Post/Poem"><center>新的诗歌</center></a><br><br>
+<a href="/blog/Post/Article"><center>新的文章</center></a><br><br>
+<a href="/blog/Post/File"><center>新的文件</center></a><br><br>
+<a href="/blog/Post/Comments/edit"><center>更改已有评论</center></a><br><br>
+<a href="/blog/Post/User/edit"><center>更改已有用户</center></a><br><br>
+<a href="/blog/Post/File/edit"><center>查看已有的文件</center></a><br><br>
+<a href="/blog/Post/BackUpFiles/edit"><center>查看已备份信息</center></a><br><br>
+<a href="/blog/Post/UserLog"><center>查看用户登录信息</center></a><br><br>
+<br><br><br>
+<br><br><br>
+      <a href="/blog/index">回到首页</a><br><br><br><br>
+      <a href="/blog/logout"><center>注销登录</center></a><br><br><br><br>
+<br><br><br>
+<a href="/blog/Post/ReStore"><center>备份数据</center></a><br>
+{% else %}
+      <a href="/blog/Post/Location"><center>记录我的位置</center></a><br><br>
+<a href="/blog/Post/Tweet"><center>新的心情</center></a><br><br><br><br><br><br><br><br>
+<a href="/blog/Post/Pic"><center>新的照片</center></a><br><br>
+
+<br><br><br>
+<br><br><br>
+<a href="/blog/index"><center>回到首页</center></a><br><br><br>
+<a href="/blog/logout"><center>注销登录</center></a><br><br><br><br>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,1 @@
+var jf_user_num = {"user_num":"3107943","timestamp":"1442550633"};
