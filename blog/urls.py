@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from blog.MyBlog.BlogContent import ShowArticle
 from blog.adminrelate import poempost
 from mysites import settings
 
@@ -14,9 +15,15 @@ urlpatterns = [
                       url(r'^ceshi/',ceshi),
                       url(r'^guestbook/',guestbook),
                       url(r'^diandi/',diandi),
+                      url(r'^learn/$',learn),
+                      url(r'^learn/?p=\d*',learn),
+                      url(r'^learn/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                       url(r'^learn/',learn),
                       url(r'^news/',news),
                       url(r'^shuo/',shuo),
+                      url(r'^Article/$',ShowArticle),
+                      url(r'^Article/?id=\d*',ShowArticle),
+                      url(r'^Article/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                       url(r'^xc/',xc),
                       url(r'^poem/',poem),
                       url(r'^login/$',login,name = 'login'),

@@ -8,15 +8,18 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-
+from DjangoUeditor.models import UEditorField
 # Create your models here.
 from django.contrib import admin
 from django.utils import timezone
 
 
 class BlogsPost(models.Model):
-    title = models.CharField(max_length = 150)
-    body = models.TextField()
+    title = models.CharField(max_length = 150,default='')
+    category = models.CharField(max_length = 150,default='其他')
+    abstract = models.CharField(max_length = 250,default='暂无简要介绍')
+    auther=models.CharField(max_length = 150,default='王炳宁')
+    body = UEditorField('内容',height=100,width=500,default='test',imagePath="./FileDir/blogmaterials/uploadpic/",toolbars='full',filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
     timestamp = models.DateTimeField()
 
 class BlogPostAdmin(admin.ModelAdmin):

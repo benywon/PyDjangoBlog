@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for mysites project.
 
@@ -38,8 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'DjangoUeditor',
 )
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +50,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
-
 ROOT_URLCONF = 'mysites.urls'
 
 TEMPLATES = [
@@ -88,6 +88,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'userlogdb.sqlite3'),
         'USER':'benywon',
         'PASSWORD':'cc2015'
+    },
+     'Articles': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'Articlesdb.sqlite3'),
+        'USER':'benywon',
+        'PASSWORD':'cc2015'
     }
 }
 
@@ -109,5 +115,9 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_PATH='./medias'
+STATIC_URL = '/medias/'
+STATIC_PATH='/medias/'
+
+
+# URL that handles the media served from MEDIA_ROOT.
+# Example: "http://media.lawrence.com"

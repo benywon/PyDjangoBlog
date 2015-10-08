@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import  url
+from blog.MyBlog.BlogContent import Article
 from blog.adminrelate import TweetPost,poempost,PicPost,FilePost,CommentPost,GodUserLog,LocationPost
 from blog.adminrelate.GodUserLog import DataRestore
 
@@ -21,4 +22,8 @@ urlpatterns = [
                        url(r'^Comments/edit/',CommentPost.EditComments,name = 'comment'),
                        url(r'^BackUpFiles/edit/',FilePost.BackUpSee,name = 'backup'),
                        url(r'^ReStore/$',DataRestore,name = 'poemsedit'),
+                       url(r'^Article/$',Article,name = 'articleedit'),
+                       url(r'^Article/edit/',Article,name = 'articleedit'),
+                       url(r'^Article/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
+
                       ]

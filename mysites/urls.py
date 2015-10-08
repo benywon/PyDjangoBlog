@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':'medias/'}),
     url(r'^FileDir/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/'}),
     url(r'^$',mainsite),
+    url(r'^ueditor/',include('DjangoUeditor.urls' )),
+
 ]
 
 

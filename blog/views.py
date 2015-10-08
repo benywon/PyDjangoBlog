@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.template import loader,Context
 from django.http import HttpResponse
+from blog.MyBlog import BlogContent
 from blog.adminrelate import TweetPost,poempost,PicPost,CommentPost,GodUserLog
 
 from blog.models import *
@@ -43,8 +44,8 @@ def diandi(request):
     ret= TweetPost.ShowTweet(request)
     return HttpResponse(ret)
 def learn(request):
-    static_html = 'learn.html'
-    return render(request, static_html)
+    ret= BlogContent.ShowBlog(request)
+    return HttpResponse(ret)
 
 def news(request):
     static_html = 'news.html'
