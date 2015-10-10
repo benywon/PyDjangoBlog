@@ -27,6 +27,7 @@ class RegistForm(forms.Form):
 
 
 def register(request):
+    message=''
     if request.method == "POST":
         uf = RegistForm(request.POST)
         if uf.is_valid():
@@ -38,20 +39,35 @@ def register(request):
             pubkey=uf.cleaned_data['pubkey']
             if pubkey != '7758521':#我们的口令
                 uf = RegistForm()
+                message="请输入口令！如果没有请向god@bingning.wang 发一封申请邮件获取！"
             else:
                 #将表单写入数据库
-                user = GodUser()
-                user.username = username
-                user.password = password
-                if email !='' and email is not None:
-                    user.email=email
-                user.timestamp=time
-                user.save()
-                #返回注册成功页面
-                return render_to_response('registsuccess.html',{'username':username})
+                #要检查用户名是否存在
+                if _doesUserContains(username):
+                    message=username+u"已经被注册！"
+                else:
+                    user = GodUser()
+                    user.username = username
+                    user.password = password
+                    if email !='' and email is not None:
+                        user.email=email
+                    user.timestamp=time
+                    user.save()
+                    #返回注册成功页面
+                    return render_to_response('registsuccess.html',{'username':username})
     else:
         uf = RegistForm()
-    return render_to_response('regist.html',{'uf':uf},context_instance=RequestContext(request))
+    return render_to_response('regist.html',{'uf':uf,'message':message},context_instance=RequestContext(request))
+
+def _doesUserContains(user):
+    try:
+        GodUser.objects.get(username=user)
+    except ObjectDoesNotExist:
+        return False
+    except Exception:
+        return False
+    return True
+
 def login(req):
     username = req.COOKIES.get('username')
     if username != '' and username is not None:

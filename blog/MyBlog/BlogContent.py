@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import re
-from blog.models import  BlogsPost
+from blog.models import  BlogsPost, BlogComments
 from django.template import loader,Context
 __author__ = 'benywon'
 
@@ -23,7 +23,8 @@ class ArticleForm(forms.ModelForm):
         model=BlogsPost
         fields = ('title', 'body','category','abstract')
 
-
+class ArticleCommentsForm(forms.Form):
+    body=UEditorField("",width=650,height=160,max_length=1000,toolbars="mini",imagePath="./FileDir/blogmaterials/uploadpic/",filePath="./FileDir/blogmaterials/uploadFile/")
 
 
 def Article(request):
@@ -102,8 +103,44 @@ def ShowArticle(request):
         num=1
     post=BlogsPost.objects.using('Articles').get(id=num)
     post.timestamp=post.timestamp.date()
+    post.comments=post.blogcomments_set.using('Articles').all().order_by('-id')
+    username = request.COOKIES.get('username')
+    if request.method=="POST":
+        uf = ArticleCommentsForm(request.POST)
+        if uf.is_valid():
+            commentscontent = uf.cleaned_data['body']
+            comments=BlogComments()
+            comments.body=commentscontent
+            comments.timestamp=datetime.datetime.now()
+            comments.auther=username
+            post.blogcomments_set.add(comments)
+            uf=ArticleCommentsForm()
+    try:
+        dnum=request.GET['DcId']
+        dnum=int(dnum)
+    except:
+        dnum=-1
+    uf=ArticleCommentsForm()
+    if username =='god':
+        if dnum>0:
+            BlogComments.objects.using('Articles').filter(id__exact=dnum).delete()
+        post.god=True
+    else:
+        post.god=False
+        for co in post.comments:
+            if co.auther == username:
+                co.candele=True
+                if dnum>0:
+                    BlogComments.objects.using('Articles').filter(id__exact=dnum).delete()
+                    dnum=-1
+            else:
+                co.candele=False
+    if username =='god':
+        post.god=True
+    else:
+        post.god=False
     t = loader.get_template("Article.html")
-    c = Context({'post':post})
+    c = Context({'post':post,'uf':uf,"Aid":num})
     return HttpResponse(t.render(c))
 
 
