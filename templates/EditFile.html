@@ -18,16 +18,25 @@
             <th>名称</th>
             <th>ID</th>
         </tr>
+ {% if number > 1 %}
+             <a href="/blog/Post/File/edit/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+         <a href="/blog/Post/File/edit/?p={{ next }}">下一页</a>
     {% for post in posts %}
         <tr>
       <td>{{ post.timestamp }}</td>
            <td>{{ user }}</td>
-           <td>{{ post.headFile }}</td>
+           <td><a href="{{ post.headFile }}">{{ post.headFile }}</a></td>
             <td>{{ post.id }}</td>
         </tr>
     {% endfor%}
 
-
 </table>
+ {% if number > 1 %}
+             <a href="/blog/Post/File/edit/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+         <a href="/blog/Post/File/edit/?p={{ next }}">下一页</a>
 </body>
 </html>

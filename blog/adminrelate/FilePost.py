@@ -38,8 +38,24 @@ def EditFiles(request):
     username = request.COOKIES.get('username')
     if username != 'god':#检测是否已经登录
         return HttpResponseRedirect('/blog/index')
-    posts=BlogFile.objects.all().order_by('-id')
-    t=render_to_response('EditFile.html',{'posts':posts,'user':'王炳宁'},context_instance=RequestContext(request))
+    showlen=30
+    lengh=len(BlogFile.objects.all())
+    try:
+        num=request.GET['p']
+        num=int(num)
+    except:
+        num=1
+
+    if num==0:
+        num=1
+    if lengh<=showlen:
+        start=0
+        end=showlen
+    else:
+        start=(num-1)*showlen
+        end=num*showlen
+    posts=BlogFile.objects.all().order_by('-id')[start:end]
+    t=render_to_response('EditFile.html',{'posts':posts,'user':'王炳宁','number':num,'pre':num-1,'next':num+1},context_instance=RequestContext(request))
     return t
 
 
