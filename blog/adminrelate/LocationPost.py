@@ -18,6 +18,8 @@ from django.db.models import Q
 def Location(request):
     showlen=35
     username = request.COOKIES.get('username')
+    if username=='' or username is None:
+        return HttpResponseRedirect('/blog/login')
     if request.method == "POST":
         lat=request.POST.get('lat')
         lng=request.POST.get('lng')

@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 import datetime
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from PublicMethods.CheckLog import checkLogin
 from blog.models import BlogPoem
 from django.template import loader,Context
 from django import forms
@@ -20,12 +21,10 @@ SOURCES_CHOICES = (
                   (True, '是以前的词'),
                   )
 class PoemForm(forms.Form):
-    nav = forms.CharField(label=u'叙述：',max_length=100,required=False)
-    poem=forms.CharField(label='诗歌',widget=forms.Textarea,max_length=300)
-    title = forms.CharField(label=u'词牌名：',max_length=100)
+    title = forms.CharField(label=u'词牌名',max_length=100,widget=forms.TextInput(attrs={'size':30}))
+    nav = forms.CharField(label=u'叙述',max_length=200,required=False,widget=forms.Textarea(attrs={'style':"height:51px;width:249px"}))
+    poem=forms.CharField(label='诗歌',widget=forms.Textarea(attrs={'style':"height:200px;width:849px"}),max_length=1200)
     isprevious = forms.ChoiceField(label=u'是否是以前',choices=SOURCES_CHOICES)
-
-
 
 def Poem(request):
     username = request.COOKIES.get('username')
@@ -80,8 +79,9 @@ def ShowPoem(request):
         prestr=__getdiv(pre)
         div=u"；".encode('utf-8')
         po.k=prestr.split(div)
+    IsLogin=checkLogin(request)
     t = loader.get_template("shuo.html")
-    c = Context({'poems':posts,'number':num,'pre':num-1,'next':num+1})
+    c = Context({'poems':posts,'number':num,'pre':num-1,'next':num+1,'IsLogin':IsLogin})
     return t.render(c)
 
 def EditPoem(request):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import  url
 from blog.MyBlog.BlogContent import Article, ArticleEdit
-from blog.adminrelate import TweetPost,poempost,PicPost,FilePost,CommentPost,GodUserLog,LocationPost
+from blog.adminrelate import TweetPost,poempost,PicPost,FilePost,CommentPost,GodUserLog,LocationPost,VideoPost
 from blog.adminrelate.GodUserLog import DataRestore
 
 __author__ = 'benywon'
@@ -10,6 +10,8 @@ __author__ = 'benywon'
 urlpatterns = [
                        url(r'^Tweet/$',TweetPost.Tweet,name = 'tweets'),
                        url(r'^Tweet/edit/',TweetPost.EditTweet,name = 'tweetsedit'),
+                       url(r'^Video/$',VideoPost.VideoPo,name = 'videos'),
+                       url(r'^Video/edit/',VideoPost.EditVideo,name = 'editvideo'),
                        url(r'^Poem/$',poempost.Poem,name = 'poems'),
                        url(r'^Pic/$',PicPost.Pic,name = 'pic'),
                        url(r'^Location/',LocationPost.Location,name = 'postion'),

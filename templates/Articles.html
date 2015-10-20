@@ -1,0 +1,157 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>文章信息-王炳宁的blog</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Quickly Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="/site_media/article/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/site_media/article/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script src="/site_media/article/js/jquery-1.11.1.min.js"></script>
+<!-- //js -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="/site_media/article/js/move-top.js"></script>
+<script type="text/javascript" src="/site_media/article/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<!-- banner-body -->
+	<div class="banner-body abt">
+		<div class="container">
+<!-- header -->
+			<div class="header">
+				<div class="header-nav">
+					<nav class="navbar navbar-default">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+						 <ul class="nav navbar-nav">
+
+                             <li class="hvr-bounce-to-bottom"><a href="/blog/index">首页</a></li>
+                             <li class="hvr-bounce-to-bottom"><a href="/blog/video">视频</a></li>
+                             <li class="hvr-bounce-to-bottom"><a href="/blog/shuo">诗情画意</a></li>
+                              <li class="hvr-bounce-to-bottom"><a href="/blog/diandi">心情点滴</a></li>
+                             <li class="hvr-bounce-to-bottom"><a href="/blog/xc">相册（单身勿点！！）</a></li>
+                             <li class="hvr-bounce-to-bottom"><a href="/blog/learn">学无止境</a></li>
+                             <li class="hvr-bounce-to-bottom"><a href="/blog/guestbook">留言板</a></li>
+
+						  </ul>
+                            {% if IsLogin %}
+						  <div class="sign-in">
+							<ul>
+								<li><a href="/blog/login/">登录</a>/</li>
+								<li><a href="/blog/regist/">注册</a></li>
+							</ul>
+                          </div>
+                            {% endif %}
+						</div><!-- /.navbar-collapse -->
+					</nav>
+				</div>
+	
+			<!-- search-scripts -->
+			<script src="/site_media/article/js/classie.js"></script>
+			<script src="/site_media/article/js/uisearch.js"></script>
+				<script>
+					new UISearch( document.getElementById( 'sb-search' ) );
+				</script>
+			<!-- //search-scripts -->
+			</div>
+<!-- //header -->
+<!-- single -->
+	<div class="single-page-artical">
+		<div >
+			<h3 align="center"><font color="#a52a2a">{{ post.title }}</font></h3>
+            <br>
+			 {{ post.body|safe }}
+		</div>
+		<div class="artical-links">
+			<ul>
+				<li><small> </small><span>{{ post.timestamp }}</span></li>
+				<li><a href="#"><small class="admin"> </small><span>{{ post.auther }}</span></a></li>
+				<li><a href="#"><small class="no"> </small><span>{{  post.category  }}</span></a></li>
+{#				<li><a href="#"><small class="posts"> </small><span>View posts</span></a></li>#}
+{#				<li><a href="#"><small class="link"> </small><span>permalink</span></a></li>#}
+			</ul>
+		</div>
+    <div class="artical-commentbox">
+
+			<div class="table-form">
+{#				<form>#}
+{#					<input type="text" class="textbox" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">#}
+{#					<input type="text" class="textbox" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">#}
+{#					<input type="text" class="textbox" value="Phone number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Phone number';}">#}
+{#					<textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>	#}
+{#					<input type="submit" value="Send">#}
+{#				</form>#}
+                <form method = 'post' enctype="multipart/form-data">
+             <h3>留下您的评论</h3>
+         {% csrf_token %}
+         {{ uf.media }}
+         {{uf.as_p}}
+              <span style="width:230px; text-align:right">
+            <input type="submit" value = "提交评论"  class="button orange"/></span>
+             </form>
+			</div>
+		</div>
+		<div class="comment-grid-top">
+			<h3>回复列表：</h3>
+			{% for comment in post.comments %}
+			<div class="comments-top-top top-grid-comment">
+
+				<div class="top-comment-right">
+					<ul>
+						<li><span class="left-at"><font color="#dc143c">{{ comment.auther }}</font></span></li>
+						<li><span class="right-at">{{ comment.timestamp }}</span></li>
+						{% if post.god or comment.candele %}<a class="reply" href="/blog/Article/?id={{ Aid }}&DcId={{ comment.id }}" style="alignment:right">删除评论</a>{% endif %}
+					</ul>
+				<p>
+                    {{ comment.body|safe }}
+                </p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+    {% endfor %}
+
+	</div>
+<!-- single -->
+		</div>
+	</div>
+<!-- footer -->
+
+	<div class="footer-bottom">
+		<div class="container">
+			<p> <a href="http://bingning.wang"> 王炳宁</a></p>
+		</div>
+	</div>
+<!-- //footer -->
+<!-- for bootstrap working -->
+		<script src="/site_media/article/js/bootstrap.js"> </script>
+<!-- //for bootstrap working -->
+</body>
+</html>

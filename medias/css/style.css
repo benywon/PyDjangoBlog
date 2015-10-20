@@ -8,6 +8,12 @@ a{text-decoration:none;}
 .clear{clear:both;}
 li{list-style:none;}
 img{display:block;border:0px;}
+.sign-in{
+	float:right;
+	text-align: center;
+	font-size: 20px;
+
+}
 /*end*/
 .weizi{width:730px;height:30px;line-height:30px; background:url("../images/weizi.png") 7px 5px no-repeat; background-color:#fff;
 border-bottom:1px solid #ccc;}

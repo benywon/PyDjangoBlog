@@ -1,26 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+<meta charset="UTF-8">
+<title>相册（请勿点击！！）-个人博客</title>
+<meta name="keywords" content="个人博客" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="/site_media/css/index.css"/>
+<link rel="stylesheet" href="/site_media/css/style.css"/>
+<script type="text/javascript" src="/site_media/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/site_media/js/common.js"></script>
+<script type="text/javascript" src="/site_media/js/waterfall.js" ></script>
+{#    <link href="/site_media/article/css/style.css" rel="stylesheet" type="text/css" media="all" />#}
+<!--[if lt IE 9]>
+<script src="/site_media/js/html5.js"></script>
+<![endif]-->
 </head>
-<div class="content">
-<input id="v_file" type="file" style="display:none;" onChange="play()"/>
-<button id="play" onClick="yincang()">播放</button>
-<video id="video_id" controls autoplay></video>
-</div>
-<script>
-function yincang(){
-var v_file=document.getElementById('v_file');
-v_file.click();
-}
-function play(){
-var file = document.getElementById('v_file').files[0];
-var url = URL.createObjectURL(file);
-console.log(url);
-document.getElementById("video_id").src = url;
 
-}
+<body>
+    <!--header start-->
+    <div id="header">
+      <h1>博客{% if IsLogin %}
+						  <div align="right">
+							<ul>
+								<li><a href="/blog/login/">登录</a></li>
+								<li><a href="/blog/regist/">注册</a></li>
+							</ul>
+                          </div>
+         {% endif %}</h1>
+      <p>建议在有wifi和父母/对象陪同下观看ho</p>
+    </div>
+     <!--header end-->
+    <!--nav-->
+     <div id="nav">
+        <ul>
+         <li><a href="/blog/index">首页</a></li>
+         <li><a href="/blog/video">视频</a></li>
+         <li><a href="/blog/shuo">诗情画意</a></li>
+          <li><a href="/blog/diandi">心情点滴</a></li>
+         <li><a href="/blog/xc">相册（请勿点击！！）</a></li>
+         <li><a href="/blog/learn">学无止境</a></li>
+         <li><a href="/blog/guestbook">留言板</a></li>
+         <div class="clear"></div>
+        </ul>
+      </div>
+    <!--header end-->
+    <!--content start-->
+    <div id="content_xc">
+         <div class="weizi">
+           <div class="wz_text">当前位置：<a href="#">首页</a>><h1>相册（请勿点击！！）</h1></div>
+         </div>
+         <div class="xc_content">
+          <div class="con-bg">
+            {% if number > 1 %}
+             <a href="/blog/video/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+            <style>
+        .divmid2{ margin:0 auto; border-width :1px;border-color:#4F4F4F; border-style:dashed ;background-color: rgba(162,205,90,0.3); }
+                .text{text-align:center;}
+    </style>
+
+         <a href="/blog/video/?p={{ next }}">下一页</a>
+              <div class="w960 mt_10">
+               {% for post in posts %}
+                    <div class="text">
+                          <video style="clear:both;display:block;margin:auto" src="/{{ post.video }}"  width="570" height="340" controls="controls"></video>
+                        {{ post.description }}<br><font color="#dc143c">{{ post.user }} </font>  发布于  {{ post.timestamp }}
+
+                    </div>
+                         {% endfor%}
+             </div>
+            {% if number > 1 %}
+             <a href="/blog/video/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+         <a href="/blog/video/?p={{ next }}">下一页</a>
+           </div>
+         </div>
+    </div>
+    <!--content end-->
+  <!--footer-->
+   <div id="footer">
+     <p>Design by:<a href="http://bingning.wang" target="_blank">王炳宁</a> 2015-09-19</p>
+    </div>
+    <!--footer end-->
+    <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
+    <script  type="text/javascript" src="/site_media/js/nav.js"></script>
+     <script>
+
+    var timer, m = 0, m1 = $("img[rel='lazy']").length;
+
+    function fade() {
+
+        $("img[rel='lazy']").each(function () {
+
+            var $scroTop = $(this).offset();
+
+            if ($scroTop.top <= $(window).scrollTop() + $(window).height()) {
+
+                $(this).hide();
+
+                $(this).attr("src", $(this).attr("lazy_src"));
+
+                $(this).attr("top", $scroTop.top);
+
+                $(this).removeAttr("rel");
+
+                $(this).removeAttr("lazy_src");
+
+                $(this).fadeIn(600);
+
+                var _left = $(this).parent().parent().attr("_left");
+
+                if (_left != undefined)
+
+                    $(this).parent().parent().animate({ left: _left }, 400);
+
+                m++;
+
+            }
+
+        });
+
+        if (m < m1) { timer = window.setTimeout(fade, 300); }
+
+        else { window.clearTimeout(timer); }
+
+    }
+
+    $(function () {
+
+        $("#wf-main img[rel='lazy']").each(function (i) {
+
+            var _left = $(this).parent().parent().css("left").replace("px", "");
+
+            $(this).parent().parent().attr("_left", _left);
+
+            $(this).parent().parent().css("left", 0);
+
+        });
+
+        fade();
+
+    });
+
+    $(".loading").hide();
+
+    $("#wf-main").show();
+
 </script>
+
+
+
+
 </body>
 </html>

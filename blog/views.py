@@ -6,7 +6,8 @@ from django.shortcuts import render
 from django.template import loader,Context
 from django.http import HttpResponse
 from blog.MyBlog import BlogContent
-from blog.adminrelate import TweetPost,poempost,PicPost,CommentPost,GodUserLog
+from blog.adminrelate import TweetPost,poempost,PicPost,CommentPost,GodUserLog,VideoPost
+from PublicMethods import CheckLog
 
 from blog.models import *
 
@@ -27,7 +28,10 @@ def about(request):
 def index(request):
     static_html = 'index.html'
     GodUserLog.LogUserInfo(request)
-    return render(request, static_html)
+    t = loader.get_template(static_html)
+    IsLogin=CheckLog.checkLogin(request)
+    c = Context({'IsLogin':IsLogin})
+    return HttpResponse(t.render(c))
 
 def shuo(request):
     t=poempost.ShowPoem(request)
@@ -54,12 +58,6 @@ def news(request):
 def xc(request):
     ret= PicPost.ShowPic(request)
     return HttpResponse(ret)
-
-def poem(request):
-    static_html = 'xc.html'
-    return render(request, static_html)
-
-
-def poem(request):
-    static_html = 'xc.html'
-    return render(request, static_html)
+def video(request):
+    ret= VideoPost.ShowVideo(request)
+    return ret

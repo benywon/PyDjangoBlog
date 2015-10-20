@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/site_media/css/style.css"/>
 <script type="text/javascript" src="/site_media/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/site_media/js/jquery.SuperSlide.2.1.1.js"></script>
+{#<link href="/site_media/article/css/style.css" rel="stylesheet" type="text/css" media="all" />#}
 <!--[if lt IE 9]>
 <script src="/site_media/js/html5.js"></script>
 <![endif]-->
@@ -17,15 +18,22 @@
 <body>
       <!--header start-->
     <div id="header">
-      <h1>博客</h1>
-      <p>敬个礼呀握握手，你是我的好朋友</p>
+      <h1>博客 {% if IsLogin %}
+						  <div align="right">
+							<ul>
+								<li><a href="/blog/login/">登录</a></li>
+								<li><a href="/blog/regist/">注册</a></li>
+							</ul>
+                          </div>
+         {% endif %}</h1>
+      <p>说你爱我，好么？好久没听到这句话了~~</p>
     </div>
      <!--header end-->
     <!--nav-->
      <div id="nav">
         <ul>
         <li><a href="/blog/index">首页</a></li>
-         <li><a href="/blog/about">关于我</a></li>
+         <li><a href="/blog/video">视频</a></li>
          <li><a href="/blog/shuo">诗情画意</a></li>
           <li><a href="/blog/diandi">心情点滴</a></li>
          <li><a href="/blog/xc">相册（单身勿点！！）</a></li>

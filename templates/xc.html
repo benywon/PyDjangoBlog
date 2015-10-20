@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>相册（请勿点击！！）-个人博客</title>
+<title>相册-个人博客</title>
 <meta name="keywords" content="个人博客" />
 <meta name="description" content="" />
 <link rel="stylesheet" href="/site_media/css/index.css"/>
@@ -10,7 +10,8 @@
 <script type="text/javascript" src="/site_media/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/site_media/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/site_media/js/common.js"></script>
-<script type="text/javascript" src="/site_media/js/waterfall.js" ></script> 
+<script type="text/javascript" src="/site_media/js/waterfall.js" ></script>
+{#    <link href="/site_media/article/css/style.css" rel="stylesheet" type="text/css" media="all" />#}
 <!--[if lt IE 9]>
 <script src="/site_media/js/html5.js"></script>
 <![endif]-->
@@ -19,7 +20,14 @@
 <body>
     <!--header start-->
     <div id="header">
-      <h1>博客</h1>
+      <h1>博客 {% if IsLogin %}
+						  <div align="right">
+							<ul>
+								<li><a href="/blog/login/">登录</a></li>
+								<li><a href="/blog/regist/">注册</a></li>
+							</ul>
+                          </div>
+         {% endif %}</h1>
       <p>基本上都是和某胖的照片，单身勿点，单身勿点，单身勿点!!!</p>
     </div>
      <!--header end-->
@@ -27,7 +35,7 @@
      <div id="nav">
         <ul>
          <li><a href="/blog/index">首页</a></li>
-         <li><a href="/blog/about">关于我</a></li>
+         <li><a href="/blog/video">视频</a></li>
          <li><a href="/blog/shuo">诗情画意</a></li>
           <li><a href="/blog/diandi">心情点滴</a></li>
          <li><a href="/blog/xc">相册（请勿点击！！）</a></li>
@@ -53,7 +61,7 @@
                <div class="w650">
                 <ul class="tips" id="wf-main" style="display:none" >
                     {% for post in posts %}
-                         <li class="wf-cld"><a href="/{{ post.headImg }}" target="_blank"> <img src="/{{ post.thumb }}"  width="200" height="178" alt="" /></a>{{ post.title }}<br>{{ post.timestamp }}</li>
+                         <li class="wf-cld"><a href="/{{ post.headImg }}" target="_blank"> <img src="/{{ post.thumb }}"  width="200" height="178" alt="" /></a>{{ post.title }}<br><font color="#dc143c">{{ post.username }} </font> 发布于  {{ post.timestamp }}</li>
 
                          {% endfor%}
                     </ul>

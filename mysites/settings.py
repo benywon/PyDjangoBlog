@@ -26,8 +26,8 @@ SECRET_KEY = '=n5)=ag)40np*!sqn#me-syg%19&x+6yn7)x0hr@rzpop*=4fd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+DEFAULT_FILE_STORAGE = 'blog.MyBlog.ImageStoreRename.ImageStorage'
 
 # Application definition
 

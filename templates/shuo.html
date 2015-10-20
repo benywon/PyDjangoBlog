@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/site_media/css/style.css"/>
 <script type="text/javascript" src="/site_media/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/site_media/js/jquery.SuperSlide.2.1.1.js"></script>
+{#    <link href="/site_media/article/css/style.css" rel="stylesheet" type="text/css" media="all" />#}
 <!--[if lt IE 9]>
 <script src="/site_media/js/html5.js"></script>
 <![endif]-->
@@ -17,16 +18,22 @@
 <body>
     <!--header start-->
     <div id="header">
-      <h1>博客</h1>
-      <p>青春是打开了,就合不上的书。人生是踏上了，就回不了头的路，爱情是扔出了，就收不回的赌注。</p>    
-	  <p>拉长每一分钟，在人生的轨道上，加速吧。</p> 
+      <h1>中国力量的博客 {% if IsLogin %}
+						  <div class="sign-in">
+							<ul>
+								<li><a href="/blog/login/">登录</a></li>
+								<li><a href="/blog/regist/">注册</a></li>
+							</ul>
+                          </div>
+         {% endif %}</h1>
+      <p>这都是浮夸的怜宫之词，这都是谈恋爱用的</p>
     </div>
      <!--header end-->
     <!--nav-->
      <div id="nav">
         <ul>
         <li><a href="/blog/index">首页</a></li>
-         <li><a href="/blog/about">关于我</a></li>
+         <li><a href="/blog/video">视频</a></li>
          <li><a href="/blog/shuo">诗情画意</a></li>
           <li><a href="/blog/diandi">心情点滴</a></li>
          <li><a href="/blog/xc">相册（单身勿点！！）</a></li>
@@ -51,11 +58,12 @@
                 <ul class="say_box">
                  <div class="sy">
 					 <div class="text" style=" text-align:center;">
-                         <p> <h1>{{ poem.title}}</h1><br>
+                         <p> <h1 style="font-family:楷体">{{ poem.title}}</h1><br>
                             <h3>{{ poem.nav }}</h3>
                      -----------------------------------------<br>
                           {% for po in poem.k %}
-                            {{ po }}<br>
+                           <font  face="楷体" size="4px"> {{ po }}</font><br>
+
                               {% endfor %}
             </p>
                      </div>

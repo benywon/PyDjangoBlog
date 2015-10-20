@@ -90,7 +90,12 @@ class BlogPic(models.Model):
         super(BlogPic, self).save()
 
 
-
+class BlogVideo(models.Model):
+    video=models.FileField(upload_to = './FileDir/Videos/')
+    timestamp=models.DateTimeField()
+    user=models.CharField(max_length=150,default='god')
+    description=models.CharField(max_length=150,default='暂无介绍')
+    isshow=models.BooleanField(default=False)
 class BlogFile(models.Model):
     headFile = models.FileField(upload_to = './FileDir/File/')
     timestamp = models.DateTimeField()

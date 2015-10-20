@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import re
+from PublicMethods.CheckLog import checkLogin
 from blog.models import BlogPic
 from django.template import loader,Context
 from django.db.models import Q
@@ -27,7 +28,7 @@ SOURCES_CHOICES = (
 
 class PicForm(forms.Form):
     pic = forms.ImageField(label=u'照片：')
-    title = forms.CharField(label=u'介绍：',max_length=200,required=False)
+    title = forms.CharField(label=u'描述',max_length=300,required=False,widget=forms.Textarea(attrs={'style':"height:51px;width:249px"}))
     ishow = forms.ChoiceField(label=u'是否公开',choices=SOURCES_CHOICES)
 
 
@@ -81,8 +82,10 @@ def ShowPic(request):
         posts=BlogPic.objects.all().order_by('-id')[start:end]
     else:
         posts=BlogPic.objects.filter(Q(isshow__exact=True)|Q(username=username)).order_by('-id')[start:end]
+
+    IsLogin=checkLogin(request)
     t = loader.get_template("xc.html")
-    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1})
+    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1,'IsLogin':IsLogin})
     return t.render(c)
 
 def EditPic(request):

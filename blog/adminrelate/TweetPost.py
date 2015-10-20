@@ -8,6 +8,7 @@ from django.template import loader,Context
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from PublicMethods.CheckLog import checkLogin
 from blog.models import GodTweet
 import datetime
 
@@ -73,8 +74,9 @@ def ShowTweet(request):
             post.shownumber=range(1)
         else:
             post.shownumber=False
+    IsLogin=checkLogin(request)
     t = loader.get_template("riji.html")
-    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1,})
+    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1,'IsLogin':IsLogin})
     return t.render(c)
 
 

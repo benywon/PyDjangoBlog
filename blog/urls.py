@@ -25,11 +25,12 @@ urlpatterns = [
                       url(r'^Article/?id=\d*',ShowArticle),
                       url(r'^Article/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                       url(r'^xc/',xc),
-                      url(r'^poem/',poem),
                       url(r'^login/$',login,name = 'login'),
+                      url(r'^login/(?P<path>.*)$','django.views.static.serve',{'document_root':'medias/'}),
                       url(r'^logout/$',logoutmy,name = 'logout'),
                       url(r'^regist/$',register,name = 'regist'),
                       url(r'^god/$',godchange,name = 'godchange'),
                       url(r'^Post/', include('blog.adminrelate.urls')),#有关更改的 都放在这
+                      url(r'^video/$',video),
                       ]
 

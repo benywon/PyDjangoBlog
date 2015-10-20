@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import re
+from PublicMethods.CheckLog import checkLogin
 from blog.models import  BlogsPost, BlogComments
 from django.template import loader,Context
 __author__ = 'benywon'
@@ -81,9 +82,9 @@ def ShowBlog(request):
     for post in posts:
         [post.ishowpic,post.picshow]=__findAnav(post.body)
 
-
+    IsLogin=checkLogin(request)
     t = loader.get_template("learn.html")
-    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1,})
+    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1,'IsLogin':IsLogin})
     return t.render(c)
 
 
@@ -96,6 +97,7 @@ def __findAnav(instr):
         return [False,None]
 
 def ShowArticle(request):
+
     try:
         num=request.GET['id']
         num=int(num)
@@ -112,6 +114,8 @@ def ShowArticle(request):
             comments=BlogComments()
             comments.body=commentscontent
             comments.timestamp=datetime.datetime.now()
+            if username =='' or username is None:
+                username='匿名'
             comments.auther=username
             post.blogcomments_set.add(comments)
             uf=ArticleCommentsForm()
@@ -139,8 +143,9 @@ def ShowArticle(request):
         post.god=True
     else:
         post.god=False
-    t = loader.get_template("Article.html")
-    c = Context({'post':post,'uf':uf,"Aid":num})
+    IsLogin=checkLogin(request)
+    t = loader.get_template("Articles.html")
+    c = Context({'post':post,'uf':uf,"Aid":num,'IsLogin':IsLogin})
     return HttpResponse(t.render(c))
 
 

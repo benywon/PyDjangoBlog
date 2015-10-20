@@ -10,10 +10,13 @@ import shutil
 from PublicMethods.FileRelate import GetFileList
 from PublicMethods.vdisksdk import UpdateData, UpdateFiles
 from blog.models import GodUser, BackUpInfo, UserLogInfo
-
+from django.template import loader,Context
 __author__ = 'benywon'
 from django.shortcuts import render, render_to_response
 from django import forms
+
+IsLogin=False
+
 
 class UserForm(forms.Form):
     username = forms.CharField(label='用户名：',max_length=100)
@@ -68,31 +71,56 @@ def _doesUserContains(user):
         return False
     return True
 
+# def login(req):
+#     username = req.COOKIES.get('username')
+#     if username != '' and username is not None:
+#         response = HttpResponseRedirect('/blog/god')
+#         return response
+#     if req.method == 'POST':
+#         uf = UserForm(req.POST)
+#         if uf.is_valid():
+#             #获取表单用户密码
+#             username = uf.cleaned_data['username']
+#             password = uf.cleaned_data['password']
+#             #获取的表单数据与数据库进行比较
+#             user = GodUser.objects.filter(username__exact = username,password__exact = password)#精确等于
+#             if user:
+#                 #比较成功，跳转index
+#                 response = HttpResponseRedirect('/blog/god')
+#                 #将username写入浏览器cookie,失效时间为3600
+#                 response.set_cookie('username',username,7200)#两个小时失效
+#                 return response
+#             else:
+#                 #比较失败，还在login
+#                 return HttpResponseRedirect('/blog/login')
+#     else:
+#         uf = UserForm()
+#     return render_to_response('login.html',{'uf':uf},context_instance=RequestContext(req))
 def login(req):
     username = req.COOKIES.get('username')
     if username != '' and username is not None:
         response = HttpResponseRedirect('/blog/god')
         return response
     if req.method == 'POST':
-        uf = UserForm(req.POST)
-        if uf.is_valid():
-            #获取表单用户密码
-            username = uf.cleaned_data['username']
-            password = uf.cleaned_data['password']
-            #获取的表单数据与数据库进行比较
-            user = GodUser.objects.filter(username__exact = username,password__exact = password)#精确等于
-            if user:
-                #比较成功，跳转index
-                response = HttpResponseRedirect('/blog/god')
-                #将username写入浏览器cookie,失效时间为3600
-                response.set_cookie('username',username,7200)#两个小时失效
-                return response
-            else:
-                #比较失败，还在login
-                return HttpResponseRedirect('/blog/login')
+        #获取表单用户密码
+        username = req.POST.get('username')
+        password = req.POST.get('password')
+        #获取的表单数据与数据库进行比较
+        user = GodUser.objects.filter(username__exact = username,password__exact = password)#精确等于
+        if user:
+            #比较成功，跳转index
+            response = HttpResponseRedirect('/blog/god')
+            #将username写入浏览器cookie,失效时间为3600
+            response.set_cookie('username',username,7200)#两个小时失效
+            return response
+        else:
+            #比较失败，还在login
+            return HttpResponseRedirect('/blog/login')
     else:
-        uf = UserForm()
-    return render_to_response('login.html',{'uf':uf},context_instance=RequestContext(req))
+        pass
+
+    static_html = 'loginHtml5.html'
+    return render(req, static_html)
 
 def logoutmy(req):
     response= HttpResponseRedirect('/blog/index')
@@ -109,7 +137,9 @@ def godchange(request):
             isgod=True
         else:
             isgod=False
-        return render_to_response('myadmin.html',{'username':username,'goduser':isgod},context_instance=RequestContext(request))
+        t = loader.get_template("myadmin.html")
+        c = Context({'username':username,'goduser':isgod})
+        return HttpResponse(t.render(c))
 
 
 def DataRestore(request):

@@ -4,6 +4,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from PublicMethods.CheckLog import checkLogin
 from blog.models import BlogComment
 from django.template import loader,Context
 
@@ -25,6 +26,7 @@ def ShowComment(request):
             canshow=True
         else:
             canshow=False
+
         mycomment=BlogComment()
         mycomment.comments=comment
         mycomment.canshow=canshow
@@ -51,8 +53,9 @@ def ShowComment(request):
         posts=BlogComment.objects.all().order_by('-id')[start:end]
     else:
         posts=BlogComment.objects.filter(canshow__exact=True).order_by('-id')[start:end]
+    IsLogin=checkLogin(request)
     t = loader.get_template("guestbook.html")
-    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1})
+    c = Context({'posts':posts,'number':num,'pre':num-1,'next':num+1,'IsLogin':IsLogin})
     return t.render(c)
 
 def EditComments(request):
