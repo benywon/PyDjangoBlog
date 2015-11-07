@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import  url
-from blog.MyBlog.BlogContent import Article, ArticleEdit
+from blog.MyBlog.BlogContent import Article, ArticleEdit, ArticleEditDraft
+from blog.MyBlog.MyDairy import DairyContent, DairyEdit
 from blog.adminrelate import TweetPost,poempost,PicPost,FilePost,CommentPost,GodUserLog,LocationPost,VideoPost
 from blog.adminrelate.GodUserLog import DataRestore
 
@@ -26,8 +27,13 @@ urlpatterns = [
                        url(r'^BackUpFiles/edit/',FilePost.BackUpSee,name = 'backup'),
                        url(r'^ReStore/$',DataRestore,name = 'poemsedit'),
                        url(r'^Article/$',Article,name = 'articleedit'),
+                       url(r'^Dairy/$',DairyContent,name = 'dairyedit'),
+                       url(r'^Dairy/edit/$',DairyEdit,name = 'articleedit'),
+                       url(r'^Dairy/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                        url(r'^Article/edit/$',ArticleEdit,name = 'articleedit'),
+                       url(r'^Article/editdraft/$',ArticleEditDraft,name = 'articleedit'),
                        url(r'^Article/edit/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
+                       url(r'^Article/editdraft/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                        url(r'^Article/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
 
                       ]

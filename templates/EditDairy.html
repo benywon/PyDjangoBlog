@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <javascript src="/site_media/js-css/jquery/jquery-1.7.2.min.js"></javascript>
+    <javascript src="/site_media/js-css/bootstrap/js/bootstrap.js"></javascript>
+    <link href="/site_media/js-css/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<br>
+<a href="/blog/Dairy"><center>回到从前</center></a>
+<br>
+<table class="table table-responsive">
+        <tr>
+            <th>时间</th>
+            <th>最后修改</th>
+            <th>作者</th>
+            <th>标题</th>
+            <th>abstract</th>
+            <th>分类</th>
+            <th>ID</th>
+        </tr>
+        {% if number > 1 %}
+             <a href="/blog/Post/Dairy/edit/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+         <a href="/blog/Post/Dairy/edit/?p={{ next }}">下一页</a>
+    {% for post in posts %}
+        <tr>
+      <td>{{ post.timestamp }}</td>
+            <td>{{ post.lastmodified }}</td>
+           <td>{{ post.auther }}</td>
+           <td>{{ post.title }}</td>
+           <td>{{ post.abstract }}</td>
+           <td>{{ post.category }}</td>
+            <td>{{ post.id }}</td>
+            <td><a href="/blog/Post/Dairy/edit/?aid={{ post.id }}&p={{ number }}">修改</a></td>
+           <td><a href="/blog/Post/Dairy/edit/?id={{ post.id }}&p={{ number }}">删除</a></td>
+        </tr>
+    {% endfor%}
+
+
+</table>
+ {% if number > 1 %}
+             <a href="/blog/Post/Dairy/edit/?p={{ pre }}">上一页</a>
+         {% endif %}
+
+         <a href="/blog/Post/Dairy/edit/?p={{ next }}">下一页</a>
+</body>
+</html>

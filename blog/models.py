@@ -17,12 +17,19 @@ from django.utils import timezone
 class BlogsPost(models.Model):
     title = models.CharField(max_length = 150,default='')
     category = models.CharField(max_length = 150,default='其他')
-    abstract = models.CharField(max_length = 250,default='暂无简要介绍')
+    abstract = models.CharField(max_length = 25000,default='暂无简要介绍')
     auther=models.CharField(max_length = 150,default='王炳宁')
-    body = UEditorField("描述",width=1300,height=700,max_length=10000,toolbars="full",imagePath="./FileDir/blogmaterials/uploadpic/",filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
+    body = UEditorField("描述",width=1300,height=700,max_length=100000000,toolbars="full",imagePath="./FileDir/blogmaterials/uploadpic/",filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
     timestamp = models.DateTimeField()
     lastmodified=models.DateTimeField(default=datetime.datetime.now())
-
+class BlogsPostDraft(models.Model):
+    title = models.CharField(max_length = 150,default='')
+    category = models.CharField(max_length = 150,default='其他')
+    abstract = models.CharField(max_length = 250000,default='')
+    auther=models.CharField(max_length = 150,default='王炳宁')
+    body = UEditorField("描述",width=1300,height=700,max_length=100000000,toolbars="full",imagePath="./FileDir/blogmaterials/uploadpic/",filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
+    timestamp = models.DateTimeField()
+    lastmodified=models.DateTimeField(default=datetime.datetime.now())
 class BlogComments(models.Model):
     '每个博客的评论 外键是某个博客'
     Article=models.ForeignKey(BlogsPost)
@@ -33,6 +40,13 @@ class BlogComments(models.Model):
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ('title','timestamp')
+class PersonalDairy(models.Model):
+    title = models.CharField(max_length = 150,default='')
+    category = models.CharField(max_length = 150,default='其他')
+    abstract = models.CharField(max_length = 25000,default='暂无简要介绍')
+    body = UEditorField("描述",width=1300,height=700,max_length=100000000,toolbars="full",imagePath="./FileDir/blogmaterials/uploadpic/",filePath="./FileDir/blogmaterials/uploadFile/",blank=True)
+    timestamp = models.DateTimeField()
+    lastmodified=models.DateTimeField(default=datetime.datetime.now())
 
 class BlogPoem(models.Model):
     title=models.CharField(max_length = 150)#词牌名

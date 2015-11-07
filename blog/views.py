@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.template import loader,Context
 from django.http import HttpResponse
-from blog.MyBlog import BlogContent
+from blog.MyBlog import BlogContent,MyDairy
 from blog.adminrelate import TweetPost,poempost,PicPost,CommentPost,GodUserLog,VideoPost
 from PublicMethods import CheckLog
 
@@ -50,7 +50,9 @@ def diandi(request):
 def learn(request):
     ret= BlogContent.ShowBlog(request)
     return HttpResponse(ret)
-
+def dairy(request):
+    ret= MyDairy.ShowDairy(request)
+    return HttpResponse(ret)
 def news(request):
     static_html = 'news.html'
     return render(request, static_html)

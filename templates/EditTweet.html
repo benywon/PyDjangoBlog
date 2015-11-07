@@ -7,6 +7,11 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
+<script>
+  function del(id){
+
+  }
+</script>
 <body>
 <br>
 <a href="/blog/diandi"><center>回到从前</center></a>
@@ -31,7 +36,7 @@
            <td>{{ post.pos }}</td>
             <td>{{ post.tweet }}</td>
             <td>{{ post.id }}</td>
-           <td><a href="/blog/Post/Tweet/edit/?id={{ post.id }}&p={{ number }}">删除</a></td>
+           <td><a  onClick="return confirm('确认要删除？')" href="/blog/Post/Tweet/edit/?id={{ post.id }}&p={{ number }}">删除</a></td>
         </tr>
 {% endfor%}
 

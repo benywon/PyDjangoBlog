@@ -30,6 +30,7 @@
             <td>{{ post.body }}</td>
             <td>{{ post.isprevious }}</td>
             <td>{{ post.id }}</td>
+            <td><a href="/blog/Post/Poem/edit/?aid={{ post.id }}&p={{ number }}">修改</a></td>
            <td><a href="/blog/Post/Poem/edit/?id={{ post.id }}">删除</a></td>
         </tr>
 {% endfor%}

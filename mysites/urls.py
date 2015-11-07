@@ -29,6 +29,7 @@ def mainsite(request):
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls')),
+    url(r'^research/', include('research.urls')),
     url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':'medias/'}),
     url(r'^FileDir/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/'}),
     url(r'^$',mainsite),

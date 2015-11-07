@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>文章信息-王炳宁的blog</title>
+<title>dairy</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -60,15 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                              <li class="hvr-bounce-to-bottom"><a href="/blog/learn">学无止境</a></li>
                              <li class="hvr-bounce-to-bottom"><a href="/blog/guestbook">留言板</a></li>
 
-						  </ul>
-                            {% if IsLogin %}
-						  <div class="sign-in">
-							<ul>
-								<li><a href="/blog/login/">登录</a>/</li>
-								<li><a href="/blog/regist/">注册</a></li>
-							</ul>
-                          </div>
-                            {% endif %}
+						  </ul>                          
 						</div><!-- /.navbar-collapse -->
 					</nav>
 				</div>
@@ -94,50 +86,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li><small> </small><span>{{ post.timestamp }}</span></li>
 				<li><a href="#"><small class="admin"> </small><span>{{ post.auther }}</span></a></li>
 				<li><a href="#"><small class="no"> </small><span>{{  post.category  }}</span></a></li>
-{#				<li><a href="#"><small class="posts"> </small><span>View posts</span></a></li>#}
-{#				<li><a href="#"><small class="link"> </small><span>permalink</span></a></li>#}
 			</ul>
 		</div>
-    <div class="artical-commentbox">
-
-			<div class="table-form">
-{#				<form>#}
-{#					<input type="text" class="textbox" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">#}
-{#					<input type="text" class="textbox" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">#}
-{#					<input type="text" class="textbox" value="Phone number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Phone number';}">#}
-{#					<textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>	#}
-{#					<input type="submit" value="Send">#}
-{#				</form>#}
-                <form method = 'post' enctype="multipart/form-data">
-             <h3>留下您的评论</h3>
-         {% csrf_token %}
-         {{ uf.media }}
-         {{uf.as_p}}
-              <span style="width:230px; text-align:right">
-            <input type="submit" value = "提交评论"  class="button orange"/></span>
-             </form>
-			</div>
-		</div>
-		<div class="comment-grid-top">
-			<h3>回复列表：</h3>
-			{% for comment in post.comments %}
-			<div class="comments-top-top top-grid-comment">
-
-				<div class="top-comment-right">
-					<ul>
-						<li><span class="left-at"><font color="#dc143c">{{ comment.auther }}</font></span></li>
-						<li><span class="right-at">{{ comment.timestamp }}</span></li>
-						{% if post.god or comment.candele %}<a class="reply" href="/blog/Article/?id={{ Aid }}&DcId={{ comment.id }}" style="alignment:right">删除评论</a>{% endif %}
-					</ul>
-				<p>
-                    {{ comment.body|safe }}
-                </p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-    {% endfor %}
-
+   
 	</div>
 <!-- single -->
 		</div>

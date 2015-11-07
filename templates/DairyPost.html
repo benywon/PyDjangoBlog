@@ -137,17 +137,17 @@
 body { background-color: #E2E2E2; }
   </style>
 <body>
-<h1 style="text-align:center">发文章页面：</h1>
+<h1 align="center"><a href="/blog/Dairy/">我的日记</a></h1>
+<h1 style="text-align:center">写日记页面：</h1>
 <div style="text-align:center">
 <form method = 'post' enctype="multipart/form-data">
     {% csrf_token %}
     {{ uf.media }}
     {{uf.as_p}}
-<input type="submit" value = "提交"  name="submitblog" class="button orange"/>       <input type="submit" value = "保存草稿" name="savetemp" class="button green"/>
+<input type="submit" value = "提交"  name="submitblog" class="button orange"/>
 </form>
 <br><br><br><br><br>
-<li><a href="/blog/Post/Article/edit">更改已有文章</a></li><br>
-    <a href="/blog/Post/Article/editdraft">修改草稿</a>
+<li><a href="/blog/Post/Dairy/edit">更改已有日记</a></li><br>
 </div>
 </body>
 </html>

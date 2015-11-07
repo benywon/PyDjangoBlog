@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from blog.MyBlog.BlogContent import ShowArticle
+from blog.MyBlog.MyDairy import ShowOneDairy
 from blog.adminrelate import poempost
 from mysites import settings
 
@@ -22,7 +23,12 @@ urlpatterns = [
                       url(r'^news/',news),
                       url(r'^shuo/',shuo),
                       url(r'^Article/$',ShowArticle),
+                      url(r'^Dairy/$',dairy),
+                      url(r'^Dairy/?p=\d*',dairy),
                       url(r'^Article/?id=\d*',ShowArticle),
+                      url(r'^MyDairy/$',ShowOneDairy),
+                      url(r'^MyDairy/?id=\d*',ShowOneDairy),
+                      url(r'^MyDairy/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                       url(r'^Article/FileDir/blogmaterials/(?P<path>.*)$','django.views.static.serve',{'document_root':'FileDir/blogmaterials/'}),
                       url(r'^xc/',xc),
                       url(r'^login/$',login,name = 'login'),
