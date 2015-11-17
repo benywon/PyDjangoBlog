@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
+import base64
+import hashlib
 import re
 import time
 
 __author__ = 'benywon'
-uu=u'我们的故事。奇偶I四点几覅哦V皇家。啊送I换掉很多 啊送id回家。奥is航道局哦回家奥是的V。'
+filename='M:/bingning.wangweb/win7web/mysites/FileDir/blogmaterials/uploadFile/最近一周的工作总结-王炳宁_20151009023659_650.doc'
+inchars=bytearray(filename)
+afterchars=[]
+for inchar in inchars:
+    afterchars.append(hex(int(inchar)))
 
-cc=re.sub(u'。',u'。；',uu)
 
-print(cc)
+print(str(afterchars))

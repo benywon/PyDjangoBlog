@@ -7,15 +7,16 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 import time
 import shutil
-from PublicMethods.FileRelate import GetFileList
+from PublicMethods.FileRelate import GetFileList, TransferFile
 from PublicMethods.vdisksdk import UpdateData, UpdateFiles
 from blog.models import GodUser, BackUpInfo, UserLogInfo
 from django.template import loader,Context
 __author__ = 'benywon'
 from django.shortcuts import render, render_to_response
 from django import forms
-
+from urllib import quote_plus
 IsLogin=False
+import sys
 
 
 class UserForm(forms.Form):
@@ -196,13 +197,19 @@ def __storeFile():
         if __doesupload(myfile):
             continue
         else:
-            UpdateFiles(myfile)
+            try:
+                updateFILE(myfile)
+            except:
+                continue
             po=BackUpInfo()
             times=datetime.datetime.now()
             po.filename=myfile
             po.timestamp=times
             po.save()
 
+
+def __getResourcesName(filename):
+    return filename.decode('gbk')+'CCC'
 def __doesupload(myfile):
     try:
         BackUpInfo.objects.get(filename=myfile)[0]
@@ -212,6 +219,12 @@ def __doesupload(myfile):
         return False
     return True
 
+def updateFILE(myfile):
+    #首先转换一下名字
+    aftername=__getResourcesName(myfile)
+    TransferFile(myfile,aftername)
+    UpdateFiles(aftername)
+    os.remove(aftername)#删除这一个临时文件
 
 def __ourcopy(srcs,dest):
     shutil.copyfile(srcs, dest)
